@@ -1,4 +1,6 @@
 <div align="center">
+  
+<img width="128" height="128" alt="icon-128" src="https://github.com/user-attachments/assets/c34aa6a6-1e47-43ad-af56-4f9e55ff3bfb" />
 
 # SiftGet
 

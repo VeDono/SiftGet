@@ -73,6 +73,16 @@ SiftGet fetches the channel's full upload list once, remembers what you've alrea
 
 ## Quick start
 
+### Option A — download a prebuilt release (no build)
+
+1. Grab the latest **`SiftGet-vX.Y.Z.zip`** from the **[Releases](https://github.com/VeDono/SiftGet/releases)** page and unzip it.
+2. `chrome://extensions` → enable **Developer mode** → **Load unpacked** → select the unzipped folder.
+3. Add your YouTube Data API v3 key (see step 1 below) in the extension's options.
+
+Prefer to build it yourself? Follow **Option B** below.
+
+### Option B — build from source
+
 ### 1. Get a YouTube Data API v3 key
 
 SiftGet never ships a key — you use your own. The free tier (10,000 quota units/day) is plenty for personal use.

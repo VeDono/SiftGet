@@ -1,6 +1,29 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, type ReactNode } from 'react'
 import { useI18n } from '@/app/providers/i18n'
 import { useApiKey, useSaveApiKey } from '../model/use-api-key'
+
+const CONSOLE_URL = 'https://console.cloud.google.com/'
+
+// Turn the literal "Google Cloud Console" inside the info text into a real link.
+function withConsoleLink(info: string): ReactNode {
+  const marker = 'Google Cloud Console'
+  const i = info.indexOf(marker)
+  if (i === -1) return info
+  return (
+    <>
+      {info.slice(0, i)}
+      <a
+        href={CONSOLE_URL}
+        target="_blank"
+        rel="noreferrer"
+        className="font-semibold text-ink underline underline-offset-2 hover:text-teal"
+      >
+        {marker}
+      </a>
+      {info.slice(i + marker.length)}
+    </>
+  )
+}
 
 export function ApiKeyField() {
   const { t } = useI18n()
@@ -54,7 +77,7 @@ export function ApiKeyField() {
         <span className="h-[18px] w-[18px] flex-none rounded-full bg-teal text-center font-mono text-[11px] font-bold leading-[18px] text-cream">
           i
         </span>
-        <div>{t('apikey_info')}</div>
+        <div>{withConsoleLink(t('apikey_info'))}</div>
       </div>
     </>
   )

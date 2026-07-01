@@ -10,6 +10,9 @@ src/shared/assets/icons/*.png
 # design reference — not part of the shipped extension
 demo design/
 
+# packaged builds (produced locally or by CI)
+*.zip
+
 # misc / OS
 .DS_Store
 *.log

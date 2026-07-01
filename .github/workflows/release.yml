@@ -1,0 +1,50 @@
+name: Release
+
+# Push a version tag (e.g. v0.1.0) to build the extension and publish a GitHub Release
+# with a ready-to-install zip — users just download it, no build needed.
+on:
+  push:
+    tags: ['v*']
+  workflow_dispatch: {} # allow manual runs (builds an artifact without a release)
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - run: npm ci
+      - run: npm run build
+
+      - name: Package dist
+        run: |
+          NAME="SiftGet-${{ github.ref_name }}"
+          cd dist && zip -r "../$NAME.zip" . && cd ..
+          ls -la *.zip
+
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: SiftGet-${{ github.ref_name }}
+          path: SiftGet-*.zip
+
+      - name: Publish GitHub Release
+        if: startsWith(github.ref, 'refs/tags/')
+        uses: softprops/action-gh-release@v2
+        with:
+          files: SiftGet-*.zip
+          generate_release_notes: true
+          body: |
+            **SiftGet ${{ github.ref_name }}** — ready-to-install build.
+
+            **Install:** download `SiftGet-${{ github.ref_name }}.zip`, unzip it, then
+            `chrome://extensions` → enable **Developer mode** → **Load unpacked** → select the unzipped folder.
+            Then add your YouTube Data API v3 key in the extension's options.

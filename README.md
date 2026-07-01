@@ -212,8 +212,14 @@ Path alias `@/*` → `src/*`. Design tokens live in `src/app/styles/theme.css` (
 The API key and all data are stored **locally** (`chrome.storage.local`) and only ever sent to
 `https://www.googleapis.com`. No analytics, no backend.
 
-## Author
+---
 
-Built by **Sergey Emelyanov** — [GitHub](https://github.com/VeDono) ·
-[LinkedIn](https://www.linkedin.com/in/sergey-emelyanov-18082b27a/) · [X](https://x.com/SergeyEDev).
-Made in Ukraine 🇺🇦
+## License
+
+Licensed under the **GNU General Public License v3.0** (GPL-3.0) — see [LICENSE](LICENSE).
+
+In short: anyone is free to use, study, modify, and share this software, and may even sell it or
+offer paid support. The one condition is copyleft — if you distribute a modified version you must
+release its source under the same GPL-3.0 license; it cannot become a closed, proprietary product.
+
+Copyright © 2026 Sergey Emelyanov.

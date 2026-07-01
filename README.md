@@ -34,7 +34,7 @@ The one the algorithm will never surface. The pick is framed as a **lottery reel
 - [Development](#development)
 - [Limitations](#limitations)
 - [Privacy](#privacy)
-- [Author](#author)
+- [License](#license)
 
 ---
 

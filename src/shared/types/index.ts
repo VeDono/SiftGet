@@ -31,6 +31,8 @@ export interface Channel {
   uploadsPlaylistId?: string
   videos: Video[]
   fetchedAt: number
+  /** In the options "tracked channels" list. Auto-cached channels default to false. */
+  tracked?: boolean
 }
 
 export type WatchedMap = Record<string, number>
@@ -80,6 +82,7 @@ export interface PopupState {
   candidateCount?: number
   reel?: Video[]
   onlyShorts?: boolean
+  tracked?: boolean
   refreshError?: ErrCode | null
   settings?: Pick<Settings, 'ignoreWatched' | 'includeShorts' | 'openInNewTab'>
 }

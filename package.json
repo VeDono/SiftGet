@@ -1,6 +1,6 @@
 {
   "name": "siftget",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "SiftGet — open a random unwatched video from the YouTube channel you're currently on.",
   "type": "module",
   "private": true,

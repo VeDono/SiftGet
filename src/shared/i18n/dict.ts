@@ -11,6 +11,8 @@ export type Dict = Record<string, string>
 export const dict: Record<Language, Dict> = {
   en: {
     settings_title: 'Settings',
+    track_add: 'Add channel to your list',
+    track_remove: 'In your list — click to remove',
     refresh_title: 'Refresh the video list',
     refresh_failed: "Couldn't refresh — showing the saved list",
     watched_label: 'WATCHED',
@@ -107,6 +109,8 @@ export const dict: Record<Language, Dict> = {
 
   ru: {
     settings_title: 'Настройки',
+    track_add: 'Добавить канал в список',
+    track_remove: 'В списке — нажми, чтобы убрать',
     refresh_title: 'Обновить список видео',
     refresh_failed: 'Не удалось обновить — показан сохранённый список',
     watched_label: 'ПРОСМОТРЕНО',
@@ -204,6 +208,8 @@ export const dict: Record<Language, Dict> = {
 
   uk: {
     settings_title: 'Налаштування',
+    track_add: 'Додати канал до списку',
+    track_remove: 'У списку — натисни, щоб прибрати',
     refresh_title: 'Оновити список відео',
     refresh_failed: 'Не вдалося оновити — показано збережений список',
     watched_label: 'ПЕРЕГЛЯНУТО',

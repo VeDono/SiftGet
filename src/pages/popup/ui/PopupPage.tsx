@@ -10,6 +10,7 @@ import { Reel } from '@/widgets/reel/ui/Reel'
 import { usePopupState } from '@/features/channel-state/model/use-popup-state'
 import { useReel } from '@/features/pick-video/model/use-reel'
 import { useSyncWatched } from '@/features/sync-watched/model/use-sync-watched'
+import { useTrackChannel } from '@/features/track-channel/model/use-track-channel'
 
 const LABEL = 'font-mono text-[10px] font-bold tracking-[2px] text-muted'
 const CAPTION = 'mt-[11px] text-center font-mono text-[11px] leading-[1.3] text-muted'
@@ -46,6 +47,20 @@ export function PopupPage() {
   const state = data?.state
   const reel = useReel(state?.channel?.channelId, data?.tabId)
   const sync = useSyncWatched(data?.tabId)
+  const track = useTrackChannel()
+
+  // The "add to list" star only makes sense once a channel is cached (ready/empty/jackpot).
+  const canTrack =
+    !!state?.channel?.channelId &&
+    (state?.status === STATUS.READY ||
+      state?.status === STATUS.EMPTY ||
+      state?.status === STATUS.ALL_WATCHED)
+  const trackToggle = canTrack
+    ? () => {
+        const id = state?.channel?.channelId
+        if (id) track.mutate({ channelId: id, tracked: !state?.tracked })
+      }
+    : undefined
 
   // ---- loading ----
   if (isLoading || !data || !state) {
@@ -109,7 +124,12 @@ export function PopupPage() {
     const onAction = map.action === 'settings' ? openOptions : () => refetch()
     return (
       <Frame>
-        <ChannelHeader channel={state.channel} onSettings={openOptions} />
+        <ChannelHeader
+          channel={state.channel}
+          onSettings={openOptions}
+          tracked={state.tracked}
+          onToggleTrack={trackToggle}
+        />
         <div className="flex flex-1 flex-col p-6">
           <div className="flex flex-1 flex-col items-center justify-center text-center">
             <div className="mb-[22px] flex h-[88px] w-[88px] items-center justify-center rounded-full border-2 border-red bg-red/10 font-sans text-[44px] font-bold leading-none text-red">
@@ -134,7 +154,12 @@ export function PopupPage() {
   if (state.status === STATUS.EMPTY) {
     return (
       <Frame>
-        <ChannelHeader channel={state.channel} onSettings={openOptions} />
+        <ChannelHeader
+          channel={state.channel}
+          onSettings={openOptions}
+          tracked={state.tracked}
+          onToggleTrack={trackToggle}
+        />
         <div className="flex flex-1 flex-col p-6">
           <div className="flex flex-1 flex-col items-center justify-center text-center">
             <div className="mb-[18px] flex h-[72px] w-[72px] items-center justify-center rounded-2xl bg-ink shadow-[inset_0_6px_16px_rgba(0,0,0,0.4)]">
@@ -164,7 +189,12 @@ export function PopupPage() {
     }
     return (
       <Frame>
-        <ChannelHeader channel={state.channel} onSettings={openOptions} />
+        <ChannelHeader
+          channel={state.channel}
+          onSettings={openOptions}
+          tracked={state.tracked}
+          onToggleTrack={trackToggle}
+        />
         <div className="flex min-h-0 flex-1 flex-col p-5 pb-[22px]">
           <div className="mb-2 flex items-end justify-between">
             <div className={`${LABEL} text-teal`}>{t('watched_label')}</div>
@@ -207,7 +237,12 @@ export function PopupPage() {
 
   return (
     <Frame>
-      <ChannelHeader channel={state.channel} onSettings={openOptions} />
+      <ChannelHeader
+        channel={state.channel}
+        onSettings={openOptions}
+        tracked={state.tracked}
+        onToggleTrack={trackToggle}
+      />
       <div className="flex min-h-0 flex-1 flex-col p-[18px] pb-5">
         <div className="mb-2 flex items-end justify-between">
           <div className="flex items-center gap-2">

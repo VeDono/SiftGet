@@ -18,6 +18,13 @@ export async function setChannel(channelId: string, data: Channel): Promise<void
   await setValue({ [channelKey(channelId)]: data })
 }
 
+// Add/remove the channel from the visible "tracked channels" list.
+export async function setChannelTracked(channelId: string, tracked: boolean): Promise<void> {
+  const ch = await getChannel(channelId)
+  if (!ch) return
+  await setChannel(channelId, { ...ch, tracked })
+}
+
 // ---- watched set ------------------------------------------------------------
 export async function getWatched(channelId: string): Promise<WatchedMap> {
   return (await getValue<WatchedMap>(watchedKey(channelId))) ?? {}
@@ -80,6 +87,9 @@ export async function listChannels(): Promise<ChannelRowData[]> {
   for (const [key, value] of Object.entries(all)) {
     if (!key.startsWith(CHANNEL_PREFIX)) continue
     const channel = value as Channel
+    // Only show channels the user explicitly added. Channels auto-cached for spinning
+    // have tracked === false; pre-existing ones (undefined) are grandfathered in.
+    if (channel.tracked === false) continue
     const id = key.slice(CHANNEL_PREFIX.length)
     const watched = (all[WATCHED_PREFIX + id] as WatchedMap | undefined) ?? {}
     const videos = Array.isArray(channel.videos) ? channel.videos : []

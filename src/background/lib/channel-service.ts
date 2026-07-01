@@ -33,11 +33,13 @@ async function ensureChannel(
   let channel = await getChannel(channelId)
   const stale = !channel || Date.now() - (channel.fetchedAt || 0) > CACHE_TTL_MS
   let refreshError: ErrCode | null = null
+  const prevTracked = channel?.tracked // preserve list membership across refreshes
 
   if (forceRefresh || stale) {
     try {
       const data = await buildChannelData(channelId, apiKey)
-      channel = { ...data, fetchedAt: Date.now() }
+      // Auto-cached channels are NOT added to the list until the user asks (tracked:false).
+      channel = { ...data, fetchedAt: Date.now(), tracked: prevTracked ?? false }
       await setChannel(channelId, channel)
     } catch (e) {
       if (!channel) throw e
@@ -111,6 +113,7 @@ export async function computeState(
     candidateCount: sel.candidateCount,
     reel: sel.sample,
     onlyShorts,
+    tracked: channel.tracked !== false, // false only when auto-cached & not added
     refreshError,
     settings: {
       ignoreWatched: settings.ignoreWatched,

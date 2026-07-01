@@ -134,7 +134,10 @@ npm run build        # → produces ./dist  (this is what Chrome loads)
 | **Use YouTube's watched state** | on | Read the red watched‑progress bar YouTube renders on the channel page (your account) and mark those videos watched. A **threshold** slider (50–100%) decides how full the bar must be — default 90% (watched to the end) |
 | **Any video (ignore watched)** | off | Pull from the whole archive, not only unwatched videos |
 
-Per channel, the options page shows a **watched / total** counter with **↻ refresh**, **Reset progress**, and **🗑 remove channel**.
+Channels aren't auto‑added to the list — press the **★ star** in the popup header to add the current
+channel to your **Tracked channels** (or press it again to remove it), so the list stays curated. Per
+channel, the options page shows a **watched / total** counter with **↻ refresh**, **Reset progress**,
+and **🗑 remove channel**.
 
 ---
 

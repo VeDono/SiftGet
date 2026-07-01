@@ -87,9 +87,9 @@ export async function listChannels(): Promise<ChannelRowData[]> {
   for (const [key, value] of Object.entries(all)) {
     if (!key.startsWith(CHANNEL_PREFIX)) continue
     const channel = value as Channel
-    // Only show channels the user explicitly added. Channels auto-cached for spinning
-    // have tracked === false; pre-existing ones (undefined) are grandfathered in.
-    if (channel.tracked === false) continue
+    // Only channels the user explicitly added (via the popup star). Everything else is
+    // just an auto-cache used for spinning / watched-tracking and stays out of the list.
+    if (channel.tracked !== true) continue
     const id = key.slice(CHANNEL_PREFIX.length)
     const watched = (all[WATCHED_PREFIX + id] as WatchedMap | undefined) ?? {}
     const videos = Array.isArray(channel.videos) ? channel.videos : []

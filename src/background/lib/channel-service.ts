@@ -113,7 +113,7 @@ export async function computeState(
     candidateCount: sel.candidateCount,
     reel: sel.sample,
     onlyShorts,
-    tracked: channel.tracked !== false, // false only when auto-cached & not added
+    tracked: channel.tracked === true, // in the list only when explicitly added
     refreshError,
     settings: {
       ignoreWatched: settings.ignoreWatched,

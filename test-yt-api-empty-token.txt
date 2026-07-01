@@ -1,0 +1,22 @@
+// Test: what happens when pageToken='' is sent to YouTube API?
+
+// According to YouTube Data API v3 documentation:
+// - pageToken parameter is optional
+// - If provided, it MUST be a valid token from a previous response
+// - An empty string '' is NOT a valid token
+// - YouTube API behavior: typically ignores empty strings OR returns 400 Bad Request
+
+// In axios v1.18.1:
+// - Line 40 of youtube.ts spreads params: { ...params, key: apiKey }
+// - This preserves pageToken: ''
+// - axios with fetch adapter calls buildURL()
+// - buildURL() uses AxiosURLSearchParams
+// - AxiosURLSearchParams uses toFormData()
+// - toFormData() at line 265 checks: !(isUndefined(el) || el === null)
+// - Empty string '' passes this check (it's neither undefined nor null)
+// - Therefore pageToken='' gets serialized to URL as &pageToken=
+
+// Result: YouTube API receives request with &pageToken= parameter
+// - Most likely: API ignores it (harmless)
+// - Possible: API returns 400 Bad Request
+// - In strict mode with error handling: fetchAllUploads() throws, blocking channel load

@@ -1,0 +1,11 @@
+/* Transparent page so the popup's rounded card corners show the browser's popup
+   backing (macOS rounds the window) instead of square cream corners. */
+html,
+body {
+  width: 360px;
+  margin: 0;
+  background: transparent;
+}
+#root {
+  width: 360px;
+}

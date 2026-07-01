@@ -1,0 +1,16 @@
+# dependencies
+node_modules/
+
+# build output (Chrome loads this via "Load unpacked", but it's generated)
+dist/
+
+# generated icons (produced by `npm run icons` / prebuild)
+src/shared/assets/icons/*.png
+
+# design reference — not part of the shipped extension
+demo design/
+
+# misc / OS
+.DS_Store
+*.log
+.vite/

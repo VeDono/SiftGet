@@ -17,24 +17,22 @@ The one the algorithm will never surface. The pick is framed as a **lottery reel
 
 ---
 
-## Table of contents
+## Demo
 
-- [What it does](#what-it-does)
-- [Tech stack](#tech-stack)
-- [Quick start](#quick-start)
-  - [1. Get a YouTube Data API v3 key](#1-get-a-youtube-data-api-v3-key)
-  - [2. Build](#2-build)
-  - [3. Load in Chrome](#3-load-in-chrome)
-  - [4. Add your key & spin](#4-add-your-key--spin)
-- [Settings](#settings)
-- [How "watched" is determined](#how-watched-is-determined)
-- [Backup: export / import](#backup-export--import)
-- [How it works](#how-it-works)
-- [Project structure (FSD)](#project-structure-feature-sliced-design)
-- [Development](#development)
-- [Limitations](#limitations)
-- [Privacy](#privacy)
-- [License](#license)
+Video 1:
+
+
+https://github.com/user-attachments/assets/94809c0e-2e1a-453a-86a2-5cf23b091e68
+
+
+Screenshot 1:
+
+<img width="265" height="400" alt="image" src="https://github.com/user-attachments/assets/03ad08b5-7c2d-4f19-84c2-1cef459e85a9" />
+
+Screenshot 2:
+
+<img width="720" height="720" alt="image" src="https://github.com/user-attachments/assets/d6f3ee03-6eda-46e7-8a61-2198abf9106c" />
+
 
 ---
 

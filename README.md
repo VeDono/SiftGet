@@ -19,12 +19,6 @@ The one the algorithm will never surface. The pick is framed as a **lottery reel
 
 ## Demo
 
-Video 1:
-
-
-https://github.com/user-attachments/assets/94809c0e-2e1a-453a-86a2-5cf23b091e68
-
-
 Screenshot 1:
 
 <img width="265" height="400" alt="image" src="https://github.com/user-attachments/assets/03ad08b5-7c2d-4f19-84c2-1cef459e85a9" />
@@ -33,6 +27,9 @@ Screenshot 2:
 
 <img width="720" height="720" alt="image" src="https://github.com/user-attachments/assets/d6f3ee03-6eda-46e7-8a61-2198abf9106c" />
 
+Video 1:
+
+https://github.com/user-attachments/assets/94809c0e-2e1a-453a-86a2-5cf23b091e68
 
 ---
 

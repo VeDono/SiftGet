@@ -38,6 +38,16 @@ export function ApiKeyField() {
   }, [savedKey])
 
   const onSave = async () => {
+    // Firefox MV3 treats host_permissions as optional (not auto-granted at install),
+    // so make sure we can reach the YouTube API. Chrome grants it at install → no-op.
+    // Called synchronously in the click handler to keep the user gesture.
+    try {
+      const origins = ['https://www.googleapis.com/*']
+      const has = await chrome.permissions.contains({ origins })
+      if (!has) await chrome.permissions.request({ origins })
+    } catch {
+      /* older browsers: ignore */
+    }
     await save.mutateAsync(value)
     setFlash(true)
     setTimeout(() => setFlash(false), 1600)

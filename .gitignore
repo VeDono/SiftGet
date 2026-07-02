@@ -3,6 +3,7 @@ node_modules/
 
 # build output (Chrome loads this via "Load unpacked", but it's generated)
 dist/
+dist-firefox/
 
 # generated icons (produced by `npm run icons` / prebuild)
 src/shared/assets/icons/*.png

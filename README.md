@@ -75,9 +75,22 @@ SiftGet fetches the channel's full upload list once, remembers what you've alrea
 
 ### Option A — download a prebuilt release (no build)
 
-1. Grab the latest **`SiftGet-vX.Y.Z.zip`** from the **[Releases](https://github.com/VeDono/SiftGet/releases)** page and unzip it.
+Grab the latest build from the **[Releases](https://github.com/VeDono/SiftGet/releases)** page:
+
+**Chrome / Edge / Opera / Brave** (any Chromium browser):
+1. Download **`SiftGet-vX.Y.Z-chromium.zip`** and unzip it.
 2. `chrome://extensions` → enable **Developer mode** → **Load unpacked** → select the unzipped folder.
-3. Add your YouTube Data API v3 key (see step 1 below) in the extension's options.
+
+**Firefox** (128 or newer):
+1. Download **`SiftGet-vX.Y.Z-firefox.zip`**.
+2. `about:debugging` → **This Firefox** → **Load Temporary Add-on…** → pick the zip
+   (or the `manifest.json` inside the unzipped folder).
+3. ⚠️ Temporary add-ons are removed when Firefox restarts — that's a Mozilla signing rule, not a
+   SiftGet limitation. For a **permanent** unsigned install use **Firefox Developer Edition / Nightly / ESR**:
+   set `xpinstall.signatures.required` to `false` in `about:config`, zip stays installed.
+
+Then add your YouTube Data API v3 key (see step 1 below) in the extension's options.
+When saving the key in Firefox, allow the `googleapis.com` permission prompt if one appears.
 
 Prefer to build it yourself? Follow **Option B** below.
 
@@ -204,11 +217,18 @@ manifest.config.ts   Manifest V3 (crxjs defineManifest)
 ## Development
 
 ```bash
-npm run dev         # Vite dev server with HMR (crxjs)
-npm run typecheck   # tsc --noEmit (strict)
-npm run build       # typecheck + production build → dist/
-npm run icons       # regenerate PNG icons from the source SVG
+npm run dev             # Vite dev server with HMR (crxjs)
+npm run typecheck       # tsc --noEmit (strict)
+npm run build           # typecheck + production build → dist/  (Chromium)
+npm run build:firefox   # build + transform manifest → dist-firefox/
+npm run package         # dist → SiftGet.zip
+npm run package:firefox # dist-firefox → SiftGet-firefox.zip
+npm run icons           # regenerate PNG icons from the source SVG
 ```
+
+The Firefox variant is the same code — `scripts/make-firefox.mjs` only rewrites the manifest
+(event‑page background instead of a service worker, `browser_specific_settings.gecko`,
+minimum Firefox 128 for `world: "MAIN"` content scripts).
 
 Path alias `@/*` → `src/*`. Design tokens live in `src/app/styles/theme.css` (`@theme`).
 

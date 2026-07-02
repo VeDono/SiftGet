@@ -1,6 +1,6 @@
 {
   "name": "siftget",
-  "version": "0.2.1",
+  "version": "0.3.0",
   "description": "SiftGet — open a random unwatched video from the YouTube channel you're currently on.",
   "type": "module",
   "private": true,
@@ -9,7 +9,9 @@
     "typecheck": "tsc --noEmit",
     "prebuild": "node scripts/gen-icons.mjs",
     "build": "tsc --noEmit && vite build",
+    "build:firefox": "npm run build && node scripts/make-firefox.mjs",
     "package": "npm run build && cd dist && zip -qr ../SiftGet.zip . -x '*.DS_Store' && cd ..",
+    "package:firefox": "npm run build:firefox && cd dist-firefox && zip -qr ../SiftGet-firefox.zip . -x '*.DS_Store' && cd ..",
     "dev": "vite",
     "preview": "vite preview"
   },

@@ -23,11 +23,13 @@ jobs:
 
       - run: npm ci
       - run: npm run build
+      - run: node scripts/make-firefox.mjs
 
-      - name: Package dist
+      - name: Package dist (Chromium + Firefox)
         run: |
           NAME="SiftGet-${{ github.ref_name }}"
-          cd dist && zip -r "../$NAME.zip" . && cd ..
+          (cd dist && zip -r "../$NAME-chromium.zip" . -x '*.DS_Store')
+          (cd dist-firefox && zip -r "../$NAME-firefox.zip" . -x '*.DS_Store')
           ls -la *.zip
 
       - name: Upload build artifact
@@ -43,8 +45,14 @@ jobs:
           files: SiftGet-*.zip
           generate_release_notes: true
           body: |
-            **SiftGet ${{ github.ref_name }}** — ready-to-install build.
+            **SiftGet ${{ github.ref_name }}** — ready-to-install builds.
 
-            **Install:** download `SiftGet-${{ github.ref_name }}.zip`, unzip it, then
+            **Chrome / Edge / Opera / Brave:** download `…-chromium.zip`, unzip, then
             `chrome://extensions` → enable **Developer mode** → **Load unpacked** → select the unzipped folder.
+
+            **Firefox (128+):** download `…-firefox.zip`, then `about:debugging` → **This Firefox** →
+            **Load Temporary Add-on…** → pick the zip (or `manifest.json` from the unzipped folder).
+            Temporary installs reset on browser restart; for a permanent install use Firefox
+            Developer Edition / Nightly / ESR with `xpinstall.signatures.required = false` in `about:config`.
+
             Then add your YouTube Data API v3 key in the extension's options.
